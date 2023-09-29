@@ -1,0 +1,25 @@
+classes
+
+Cliente: (Cleber e Caio)
+- nome
+- cpf
+- telefone
+- sexo
+- nacionalidade
+getters()
+setters()
+
+Reserva: (Gustavo e Leticia)
+- pessoas
+- data
+- dias
+- pagamento
+getters()
+setters()
+
+Quarto: (Bárbara e Tiago)
+- numero
+- andar
+- tipo
+getters()
+setters()

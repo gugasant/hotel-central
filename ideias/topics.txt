@@ -1,0 +1,12 @@
+Tópicos
+
+- git/github
+- factory method
+- mvc
+- typescript
+- POO*
+- server
+- rotas
+- array -> mysql
+- front-end
+- documentação de projetos
