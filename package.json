@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "@types/express": "^4.17.18",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2",
+    "yarn": "^1.22.19"
+  },
+  "name": "h-central",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:gugasant/hotel-central.git",
+  "author": "gugasant <gustavosantlopes3@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
