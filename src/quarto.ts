@@ -1,37 +1,37 @@
 class Quarto {
-  private numero:number
-  private andar:number
-  private tipo:string
+  private numeroQuarto:number
+  private andarQuarto:number
+  private tipoQuarto:string
 
-  constructor(numero:number, andar:number, tipo:string) {
-    this.numero = numero
-    this.andar = andar
-    this.tipo = tipo
+  constructor(numeroQuarto:number, andarQuarto:number, tipoQuarto:string) {
+    this.numeroQuarto = numeroQuarto
+    this.andarQuarto = andarQuarto
+    this.tipoQuarto = tipoQuarto
   }
 
   // getters
   public getNumero() {
-    return this.numero
+    return this.numeroQuarto
   }
 
   public getAndar() {
-    return this.andar
+    return this.andarQuarto
   }
 
   public getTipo() {
-    return this.tipo
+    return this.tipoQuarto
   }
 
   // setters 
   public setNumero(value:number) {
-    this.numero = value
+    this.numeroQuarto = value
   }
 
   public setAndar(value:number) {
-    this.andar = value
+    this.andarQuarto = value
   }
 
   public setTipo(value:string) {
-    this.tipo = value
+    this.tipoQuarto = value
   }
 }
