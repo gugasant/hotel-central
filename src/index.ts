@@ -1,6 +1,8 @@
 import express from 'express';
 import Cliente from './cliente';
 
+//testando
+
 const server = express();
 
 server.use(express.json())
