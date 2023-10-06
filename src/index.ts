@@ -1,5 +1,7 @@
 import express from 'express';
 import Cliente from './cliente';
+import Quarto from "./quarto";
+import Reserva from "./reserva";
 
 //testando
 
@@ -10,6 +12,17 @@ server.use(express.json())
 const porta = 3000;
 
 const clientes: Cliente[] = [];
+
+const quartosOcupados: { quarto: Quarto }[] = [];
+const quartosDisponiveis: { quarto: Quarto }[] = [
+  { quarto: new Quarto(100, 1, "Individual", 1) },
+  { quarto: new Quarto(101, 1, "Individual", 1) },
+  { quarto: new Quarto(102, 1, "Suíte", 1) },
+  { quarto: new Quarto(103, 1, "Suíte", 2) },
+  { quarto: new Quarto(104, 1, "Individual", 1) },
+  { quarto: new Quarto(104, 1, "Suíte", 1) },
+];
+const reserva: Reserva[] = [];
 
 // Ler
 server.get('/cliente', (req, res) => {
@@ -26,6 +39,28 @@ server.post('/cliente', (req, res) => {
         console.log(err)
     }
 });
+
+// reservar quarto
+server.post('/reserva', (req, res) => {
+    try {
+        const reservaQuarto = new Reserva(req.body.dataIda,req.body.quantDias,req.body.quantPessoas,req.body.tipoQuarto)
+        quartosDisponiveis.forEach((e,index) => {
+            const tipoQuarto = e.quarto.getTipo()
+            if (req.body.tipoQuarto == tipoQuarto) {
+                if (req.body.quantPessoas == e.quarto.getqntdCama()) {
+                    let quartosReservados = quartosDisponiveis.splice(index,1)
+                    quartosReservados.forEach(element => {
+                        quartosOcupados.push(element)
+                        reserva.push(reservaQuarto,element[index].numero)
+                        res.status(201).send(`Quarto ${element} reservado com sucesso!`);
+                    })
+                }
+            }
+        })
+    } catch(err) {
+        console.error(err)
+    }
+})
 
 
 function buscarClientePorId(id: number) {
