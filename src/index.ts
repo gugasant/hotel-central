@@ -1,60 +1,30 @@
 import express from 'express';
-import Cliente from './cliente';
+import ClienteController from './controller/ClienteController';
+import ReservaController from './controller/ReservaController';
 
 const server = express();
 
-server.use(express.json())
+server.use(express.json());
 
+// Rotas cliente
+server.get('/clientes', ClienteController.buscarTodos);
+server.post('/clientes', ClienteController.criarCliente);
+server.get('/clientes/:id', ClienteController.buscarClientePorId);
+server.get(
+    '/clientes/:id/completo',
+    ClienteController.buscarClienteCompletoPorId
+);
+
+// Rotas reserva
+server.get('/reservas', ReservaController.buscarTodos);
+server.put('/reservas/confirmar', ReservaController.confirmarReserva);
+server.get(
+    '/reservas/quartos-disponiveis',
+    ReservaController.buscarQuartosDisponiveis
+);
+
+// Porta do servidor
 const porta = 3000;
-
-const clientes: Cliente[] = [];
-
-// Ler
-server.get('/cliente', (req, res) => {
-    res.send(clientes)
-});
-
-// Criar
-server.post('/cliente', (req, res) => {
-    try {
-        const cliente = new Cliente(req.body.idCliente, req.body.nome, req.body.cpf, req.body.telefone, req.body.genero, req.body.nacionalidade);
-        clientes.push(cliente);
-        res.status(201).send('Cliente cadastrado com sucesso!')
-    } catch (err) {
-        console.log(err)
-    }
-});
-
-
-function buscarClientePorId(id: number) {
-    return clientes.filter(cliente => cliente.getIdCliente() == id);
-}
-
-function buscarIndiceCliente (id: number) {
-    return clientes.findIndex(cliente => cliente.getIdCliente() == id);
-}
-
-// Deletar
-server.delete('/cliente/:id', (req, res) => {
-    let indice = buscarIndiceCliente(Number(req.params.id));
-    console.log(indice);
-    clientes.splice(indice, 1);
-    res.send(clientes); 
-});
-
-//Alterar
-server.put('/cliente/:id', (req, res) => {
-    console.log(req.params.id);
-    let indice = buscarIndiceCliente(Number(req.params.id));
-    console.log(indice);
-    clientes[indice].setIdCliente = req.body.idCliente;
-    clientes[indice].setNome = req.body.nome;
-    clientes[indice].setCpf = req.body.cpf;
-    clientes[indice].setTelefone = req.body.telefone;
-    clientes[indice].setGenero = req.body.genero;
-    clientes[indice].setNacionalidade = req.body.nacionalidade;
-    res.json(clientes);
-})
 
 // Servidor rodando
 server.listen(porta, () => {
